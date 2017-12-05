@@ -1,0 +1,55 @@
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="info" style="position:relative;left:0;">
+          <p><?=$this->identity?></p>
+        </div>
+      </div>
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        <li class="header">MAIN NAVIGATION</li>
+        <li><a href="<?=$this->url('dashboard')?>"><i class="fa fa-circle-o text-red"></i> <span>Dashboard</span></a></li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Customers</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?=$this->url('customers')?>"><i class="fa fa-circle-o"></i> Show Customers</a></li>
+			<li><a href="<?=$this->url('customers/new')?>"><i class="fa fa-circle-o"></i> New Customer</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-server"></i> <span>Forge VD Backups</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          	<li><a href="<?=$this->url('backups/validate')?>"><i class="fa fa-circle-o"></i> Validate Google API</a></li>
+            <li><a href="<?=$this->url('backups/hosts')?>"><i class="fa fa-circle-o"></i> Backup Hosts</a></li>
+            <li><a href="<?=$this->url('backups/database')?>"><i class="fa fa-circle-o"></i> Backup Databases</a></li>
+            <li><a href="<?=$this->url('backups/configuration')?>"><i class="fa fa-circle-o"></i> Configuration</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-server"></i> <span>Virtual Hosts</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?=$this->url('virtualhost')?>"><i class="fa fa-circle-o"></i>Virtual Hosts</a></li>
+            <li><a href="<?=$this->url('virtualhost/configuration')?>"><i class="fa fa-circle-o"></i>Configuration</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>

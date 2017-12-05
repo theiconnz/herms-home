@@ -1,0 +1,26 @@
+{
+	"name" : "theiconnz/herms-home",
+	"description" : "Herms home module to replace application module",
+	"license" : "BSD-3-Clause",
+	"type" : "theicon-zf",
+	"version" : "0.0.1",
+	"minimum-stability" : "stable",
+	"homepage" : "https://theicon.co.nz",
+	"prefer-stable" : true,
+	"require" : {
+		"php" : "^7.0",
+		"zendframework/skeleton-application" : "*",
+		"theiconnz/herms-installer" : "*",
+		"theiconnz/herms-core" : ">=0.0.1"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Theiconnz\\" : "src/"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"TheiconnzTest\\" : "test/"
+		}
+	}
+}

@@ -1,0 +1,28 @@
+<?= $this->doctype() ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?= $this->headTitle('ZF Skeleton Application')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?= $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+                        ->prependStylesheet($this->basePath('bootstrap/css/bootstrap.min.css'))
+						->prependStylesheet($this->basePath('dist/css/AdminLTE.min.css'))
+                        ->prependStylesheet('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css')
+                        ->prependStylesheet('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css');
+						
+        ?>
+    </head>
+    <body class="hold-transition login-page">
+			<?= $this->Success();?>
+			<?= $this->Error();?>
+            <?= $this->content; ?>
+        <?= $this->inlineScript()->prependFile($this->basePath('bootstrap/js/bootstrap.min.js')) ?>
+    </body>
+</html>
