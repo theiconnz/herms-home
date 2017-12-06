@@ -15,12 +15,12 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"HermsCore\\" : "src/"
+			"HermsHome\\" : "src/"
 		}
 	},
 	"autoload-dev" : {
 		"psr-4" : {
-			"HermsCoreTest\\" : "test/"
+			"HermsHomeTest\\" : "test/"
 		}
 	}
 }
