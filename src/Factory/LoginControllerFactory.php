@@ -36,7 +36,7 @@ class LoginControllerFactory implements FactoryInterface
         $requestedName,
         array $options = null)
     {
-		$configService = $container->get('HermsHome\Service\ConfigurationFactory');
+		$configService = $container->get('HermsCore\Service\ConfigurationFactory');
         return new LoginController($configService, $container);
     }
 	

@@ -14,15 +14,10 @@
  */
 namespace HermsHome\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Authentication\AuthenticationService;
-use Zend\Authentication\Adapter\DbTable as AuthAdapter;
-use Zend\Authentication\Result as Result;
 use HermsHome\Form\FormLogin;
-use Zend\view\Model\ViewModel;
-use HermsHome\Model\LoginValidation;
-use HermsCore\Model\zbeMessage;
 use Interop\Container\ContainerInterface;
+use HermsCore\Controller\FrontController;
 
 /**
  * Index Controller Class
@@ -33,7 +28,7 @@ use Interop\Container\ContainerInterface;
  * @license  GPL http://theicon.co.nz
  * @link     http://theicon.co.nz
  */
-class IndexController extends AbstractActionController
+class IndexController extends FrontController
 {
 	/*
 	* @var Zend\ServiceManager\ServiceLocatorInterface
@@ -54,6 +49,7 @@ class IndexController extends AbstractActionController
 	public function __construct(
 		ContainerInterface $container
 	) {
+	    parent::__construct($container);
 		$this->container = $container;
 		$this->authService = new AuthenticationService();
 	}

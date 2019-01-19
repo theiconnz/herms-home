@@ -14,8 +14,8 @@
  */
 namespace HermsHome\Controller;
 
-use Zend\Authentication\AuthenticationService;
 use Interop\Container\ContainerInterface;
+use HermsCore\Controller\AdminController;
 
 /**
  * DashboardController Class

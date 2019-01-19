@@ -14,7 +14,6 @@
  */
 namespace HermsHome\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Authentication\Adapter\DbTable as AuthAdapter;
 use Zend\Authentication\Result as Result;
 use Zend\Authentication\AuthenticationService;
@@ -23,6 +22,7 @@ use HermsHome\Model\LoginValidation;
 use HermsCore\Model\zbeMessage;
 use HermsCore\Manager\ConfigurationManager;
 use Interop\Container\ContainerInterface;
+use HermsCore\Controller\FrontController;
 
 /**
  * LoginController Class
@@ -33,7 +33,7 @@ use Interop\Container\ContainerInterface;
  * @license  GPL http://theicon.co.nz
  * @link     http://theicon.co.nz
  */
-class LoginController extends AbstractActionController
+class LoginController extends FrontController
 {
 	/*
 	* @var Zend\ServiceManager\ServiceLocatorInterface
@@ -47,6 +47,8 @@ class LoginController extends AbstractActionController
 	
 	protected $authService;
 	
+	protected $usermanager;
+	
 	/*
 	* @var HermsCore\Manager\ConfigurationManager
 	*/
@@ -59,6 +61,7 @@ class LoginController extends AbstractActionController
 		$this->configurationManager = $configurationManager;
 		$this->container = $container;
 		$this->authService = new AuthenticationService();
+		$this->usermanager = $this->container->get('UserManager');
 	}
 	
     /**
@@ -70,19 +73,17 @@ class LoginController extends AbstractActionController
     {
         $request = $this->getRequest();
         $message = new zbeMessage();
-		if( $request->isPost() ){
+		if ($request->isPost()){
             $loginForm = new FormLogin();
             $inputFilter = new LoginValidation();
             $loginForm->setInputFilter( $inputFilter->getInputFilter() );
             $loginForm->setData( $request->getPost() );
 			
-			if( $loginForm->isValid() ){
+			if ($loginForm->isValid()){
              	$post = $request->getPost();
-                $configdata = $this->container->get('config');
-                $username = trim($post['userlogin']);
-                $salt = md5( $username );
-				
-				$p = sprintf("%s:%s",md5($configdata["production"]["encription_key"].$post['pw']),$salt);
+             	$configdata = $this->container->get('config');
+             	$username = sprintf("%s", trim($post['userlogin']));
+             	$p = $this->usermanager->getEncryptedPassword($username, $post['pw']);
 				
 				$adapter = $this->container->get('Zend\Db\Adapter\Adapter');
 				$authadapter = new AuthAdapter($adapter);
@@ -96,7 +97,7 @@ class LoginController extends AbstractActionController
 				
 				if ($result->isValid()) {
 					return $this->redirect()->toRoute( 'dashboard' );
- 				} else {
+				} else {
                     switch ($result->getCode()) {
                         case Result::FAILURE_IDENTITY_NOT_FOUND:
                             $msg = 'Incorrect credentials';
@@ -109,7 +110,6 @@ class LoginController extends AbstractActionController
                         case Result::SUCCESS:
                             $msg = 'SUCCESS';
                             break;
-                
                         default:
                             $msg = 'Incorrect credentials';
                             break;
@@ -135,6 +135,16 @@ class LoginController extends AbstractActionController
 			$this->authService->clearIdentity();
 		}
 		$this->redirectAdminIndex();
+	}
+	
+	/**
+	 * Reset Password action
+	 *
+	 * @return object
+	 */
+	public function resetpasswordAction()
+	{
+	    return true;
 	}
 	
     public function redirectAdminIndex(){

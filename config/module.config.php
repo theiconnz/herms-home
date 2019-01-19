@@ -51,6 +51,15 @@ return [
 							]
 						],
 					],
+				    'resetpassword' => [
+				        'type' => Literal::class,
+				        'options' => [
+				            'route' => '/resetpassword',
+				            'defaults' => [
+				                'action' => 'resetpassword',
+				            ]
+				        ],
+				    ],
 				],
             ],
             'dashboard' => [
@@ -67,7 +76,6 @@ return [
     ],
     'controllers' => [
         'factories' => [
-			Controller\AdminController::class => 'HermsHome\Factory\AdminControllerFactory',
             Controller\IndexController::class => 'HermsHome\Factory\IndexControllerFactory',
             Controller\LoginController::class => 'HermsHome\Factory\LoginControllerFactory',
 			Controller\DashboardController::class => 'HermsHome\Factory\DashboardControllerFactory',
@@ -79,6 +87,7 @@ return [
         'doctype'                  => 'HTML5',
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
+        "base_path"                => "/",
         'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'herms-home/index/index'     => 
